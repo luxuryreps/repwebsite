@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Watch Collection</title>
+  <style>
+    /* Fonts & Reset */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f6f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #1a1a1a, #333);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    header h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    header p {
+      font-size: 1rem;
+      opacity: 0.85;
+    }
+
+    /* Nav */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      background: #222;
+      padding: 0.8rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #25d366;
+    }
+
+    /* Container */
+    .container {
+      padding: 2rem 1rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      color: #111;
+      border-left: 4px solid #25d366;
+      padding-left: 0.6rem;
+    }
+
+    /* Watch Grid */
+    .watch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .watch-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-align: center;
+    }
+    .watch-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .watch-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+    .watch-card h3 {
+      margin: 0.8rem 0 0.3rem;
+      font-size: 1.1rem;
+      color: #222;
+    }
+    .watch-card p {
+      font-size: 0.9rem;
+      color: #666;
+      padding: 0 1rem 1rem;
+    }
+
+    /* Contact & WhatsApp */
+    .contact {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+    .contact p {
+      margin: 0.6rem 0;
+      font-size: 1rem;
+    }
+    .contact a {
+      color: #25d366;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .whatsapp-btn {
+      display: inline-block;
+      background: #25d366;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .whatsapp-btn:hover {
+      background: #1ebe5d;
+      transform: scale(1.05);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.85rem;
+      background: #111;
+      color: #aaa;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>⌚ Luxury Reps</h1>
+    <p>Current Stock</p>
+  </header>
+
+  <nav>
+    <a href="#inventory">Inventory</a>
+    <a href="#contact">Contact</a>
+    <a href="#whatsapp">WhatsApp</a>
+  </nav>
+
+  <div class="container" id="inventory">
+    <h2>Watch Inventory</h2>
+    <div class="watch-grid" id="watchGrid">
+      <!-- Watch cards will be injected by JavaScript -->
+    </div>
+  </div>
+
+  <div class="container contact" id="contact">
+    <h2>Contact Me</h2>
+    <p>Email: <a href="mailto:mustafa_rizvi@hotmail.com">mustafa_rizvi@hotmail.com</a></p>
+    <p>Phone: <a href="tel:+14374342937">+1 437-434-2937</a></p>
+  </div>
+
+  <div class="container contact" id="whatsapp">
+    <h2>Join My WhatsApp Group</h2>
+    <a href="https://chat.whatsapp.com/FQsuggGi4ZSHShQw73p3t9" target="_blank" class="whatsapp-btn">
+      💬 Join on WhatsApp
+    </a>
+  </div>
+
+  <footer>
+    &copy; 2025 My Watch Collection
+  </footer>
+
+  <script>
+    // Example watch data
+    const watches = [
+      { name: "Rolex Submariner", desc: "Classic diver watch s dahsd  hsd ahs dhas dha shd ha dh a", img: "https://via.placeholder.com/400x250?text=Rolex+Submariner" },
+      { name: "Omega Speedmaster", desc: "Moonwatch chronograph", img: "https://via.placeholder.com/400x250?text=Omega+Speedmaster" },
+      { name: "Seiko SKX007", desc: "Affordable dive watch", img: "https://via.placeholder.com/400x250?text=Seiko+SKX007" },
+      { name: "Casio G-Shock", desc: "Durable everyday watch", img: "https://via.placeholder.com/400x250?text=Casio+G-Shock" },
+    ];
+
+    const grid = document.getElementById("watchGrid");
+    watches.forEach(watch => {
+      const card = document.createElement("div");
+      card.className = "watch-card";
+      card.innerHTML = `
+        <img src="${watch.img}" alt="${watch.name}">
+        <h3>${watch.name}</h3>
+        <p>${watch.desc}</p>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>
