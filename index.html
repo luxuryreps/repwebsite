@@ -254,7 +254,8 @@
     <span class="close" id="closeModal">&times;</span>
     <span class="prev" id="prev">&#10094;</span>
     <div class="modal-content">
-      <img id="modalImage" src="" alt="">
+      <img id="modalImage" src="" alt="" style="display:none;">
+      <video id="modalVideo" controls style="max-height:80vh; border-radius:10px; display:none;"></video>
     </div>
     <span class="next" id="next">&#10095;</span>
   </div>
@@ -278,8 +279,9 @@
   ] 
 },
 { 
-  name: "Cartier Dumont Small", 
-  desc: "$70", 
+  name: "Cartier Santos Dumont", 
+  desc: "$100 Large Dial, $80 Small Dial", 
+  video: "videos/moonswatch/demo.mp4",
   images: [
     "images/cartier/dumont/cartierdumontmain.jpeg", 
     "images/cartier/dumont/black&silver_front.jpeg", 
@@ -301,7 +303,7 @@
 },
 { 
   name: "Rolex DateJust 41MM", 
-  desc: "Automatic", 
+  desc: "Automatic. $150", 
   images: [
     "images/rolex/dj/front.jpeg", 
     "images/rolex/dj/side.jpeg", 
@@ -342,13 +344,18 @@
     "images/rolex/sub/front.jpeg", 
     "images/rolex/sub/side.jpeg"
   ] 
+},
+{ 
+  name: "Hublot Classic Fusion 42MM", 
+  desc: "Automatic. $150", 
+  images: [
+    "images/rolex/sub/front.jpeg", 
+    "images/rolex/sub/side.jpeg"
+  ] 
 }
-
     ];
 
     const grid = document.getElementById("watchGrid");
-    let currentImages = [];
-    let currentIndex = 0;
 
     watches.forEach((watch, idx) => {
       const card = document.createElement("div");
@@ -368,27 +375,73 @@
     });
 
     const modal = document.getElementById("imageModal");
-    const modalImg = document.getElementById("modalImage");
-    const closeModal = document.getElementById("closeModal");
-    const prev = document.getElementById("prev");
-    const next = document.getElementById("next");
+const modalImg = document.getElementById("modalImage");
+const modalVid = document.getElementById("modalVideo");
+const closeModal = document.getElementById("closeModal");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
 
-    function showImage() {
-      modalImg.src = currentImages[currentIndex];
-    }
+let currentMedia = [];
+let currentIndex = 0;
 
-    closeModal.onclick = () => modal.style.display = "none";
-    prev.onclick = () => {
-      currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
-      showImage();
-    };
-    next.onclick = () => {
-      currentIndex = (currentIndex + 1) % currentImages.length;
-      showImage();
-    };
-    window.onclick = (e) => {
-      if (e.target === modal) modal.style.display = "none";
-    };
+watches.forEach((watch) => {
+  const card = document.createElement("div");
+  card.className = "watch-card";
+  card.innerHTML = `
+    <img src="${watch.images[0]}" alt="${watch.name}">
+    <h3>${watch.name}</h3>
+    <p>${watch.desc}</p>
+  `;
+
+  card.addEventListener("click", () => {
+    // First item = video if it exists
+    currentMedia = watch.video ? [watch.video, ...watch.images] : [...watch.images];
+    currentIndex = 0;
+    showMedia();
+    modal.style.display = "flex";
+  });
+
+  grid.appendChild(card);
+});
+
+function showMedia() {
+  const currentSrc = currentMedia[currentIndex];
+  const isVideo = currentSrc.endsWith(".mp4") || currentSrc.endsWith(".mov") || currentSrc.endsWith(".webm");
+
+  if (isVideo) {
+    modalVid.src = currentSrc;
+    modalVid.style.display = "block";
+    modalVid.play();
+    modalImg.style.display = "none";
+  } else {
+    modalImg.src = currentSrc;
+    modalImg.style.display = "block";
+    modalVid.pause();
+    modalVid.style.display = "none";
+  }
+}
+
+closeModal.onclick = () => {
+  modal.style.display = "none";
+  modalVid.pause();
+};
+
+prev.onclick = () => {
+  currentIndex = (currentIndex - 1 + currentMedia.length) % currentMedia.length;
+  showMedia();
+};
+next.onclick = () => {
+  currentIndex = (currentIndex + 1) % currentMedia.length;
+  showMedia();
+};
+
+window.onclick = (e) => {
+  if (e.target === modal) {
+    modal.style.display = "none";
+    modalVid.pause();
+  }
+};
+
   </script>
 </body>
 </html>
