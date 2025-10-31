@@ -357,23 +357,6 @@
 
     const grid = document.getElementById("watchGrid");
 
-    watches.forEach((watch, idx) => {
-      const card = document.createElement("div");
-      card.className = "watch-card";
-      card.innerHTML = `
-        <img src="${watch.images[0]}" alt="${watch.name}">
-        <h3>${watch.name}</h3>
-        <p>${watch.desc}</p>
-      `;
-      card.addEventListener("click", () => {
-        currentImages = watch.images;
-        currentIndex = 0;
-        showImage();
-        document.getElementById("imageModal").style.display = "flex";
-      });
-      grid.appendChild(card);
-    });
-
 const modal = document.getElementById("imageModal");
 const modalImg = document.getElementById("modalImage");
 const modalVid = document.getElementById("modalVideo");
